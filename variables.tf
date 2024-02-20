@@ -107,3 +107,8 @@ variable "lambda_timeout" {
   default = "900"
 }
 
+variable "environment" {
+  type    = string
+  description = "Environment for this this resource is deployed"
+}
+

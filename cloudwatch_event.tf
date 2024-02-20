@@ -5,6 +5,7 @@ resource "aws_cloudwatch_event_rule" "cloudwatch_log_retention_event_trigger" {
   depends_on = [
     aws_lambda_function.log_retention_lambda
   ]
+  tags = local.tags
 }
 
 resource "aws_cloudwatch_event_target" "cloudwatch_log_retention_trigger_target" {

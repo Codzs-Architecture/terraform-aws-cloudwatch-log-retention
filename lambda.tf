@@ -27,6 +27,7 @@ resource "aws_cloudwatch_log_group" "log_retention_lambda_logs" {
   lifecycle {
     ignore_changes = [retention_in_days]
   }
+  tags = local.tags
 }
 
 resource "aws_iam_role" "log_retention_lambda_execution_role" {
@@ -132,6 +133,7 @@ resource "aws_lambda_function" "log_retention_lambda" {
     aws_cloudwatch_log_group.log_retention_lambda_logs,
     aws_iam_role_policy_attachment.log_retention_lambda_permissions
   ]
+  tags = local.tags
 }
 
 output "lambda_function_arn" {
