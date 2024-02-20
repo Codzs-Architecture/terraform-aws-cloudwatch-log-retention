@@ -133,6 +133,12 @@ resource "aws_lambda_function" "log_retention_lambda" {
     aws_cloudwatch_log_group.log_retention_lambda_logs,
     aws_iam_role_policy_attachment.log_retention_lambda_permissions
   ]
+
+  vpc_config {
+    subnet_ids = var.subnet_ids
+    security_group_ids = var.security_group_ids
+  }
+
   tags = local.tags
 }
 
