@@ -117,7 +117,7 @@ variable "subnet_ids" {
   description = "List of subnet ids for lambda"
 }
 
-variable "security_group_id" {
+variable "security_group_ids" {
   type    = list(string)
   description = "List of security group ids for lambda"
 }
