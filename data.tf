@@ -14,3 +14,23 @@ locals {
     "${var.department_tag_key}" : "${var.department_tag_value}"
   }
 }
+
+data "aws_vpc" "this" {
+  tags = {
+    Name = "vpc-${var.environment}"
+  }
+}
+
+data "aws_subnets" "this" {
+  filter {
+    name   = "vpc-id"
+    values = [data.aws_vpc.this.id]
+  }
+}
+
+data "aws_security_groups" "this" {
+  filter {
+    name   = "vpc-id"
+    values = [data.aws_vpc.this.id]
+  }
+}

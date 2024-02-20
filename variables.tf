@@ -111,13 +111,3 @@ variable "environment" {
   type    = string
   description = "Environment for this this resource is deployed"
 }
-
-variable "subnet_ids" {
-  type    = list(string)
-  description = "List of subnet ids for lambda"
-}
-
-variable "security_group_ids" {
-  type    = list(string)
-  description = "List of security group ids for lambda"
-}
