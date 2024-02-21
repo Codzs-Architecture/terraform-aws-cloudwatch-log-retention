@@ -83,6 +83,11 @@ resource "aws_iam_policy" "log_retention_lambda_permissions" {
         {
           Action = [
             "ec2:DescribeRegions",
+            "ec2:DescribeNetworkInterfaces",
+            "ec2:CreateNetworkInterface",
+            "ec2:DeleteNetworkInterface",
+            "ec2:DescribeInstances",
+            "ec2:AttachNetworkInterface",
           ],
           Resource = "*"
           Effect   = "Allow"
