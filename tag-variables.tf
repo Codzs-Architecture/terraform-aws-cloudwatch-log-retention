@@ -1,83 +1,23 @@
-variable "name_tag_key" {
-  type        = string
-  description = "The tag key for the 'Name' tag."
-  default     = "Name"
+module "tags_client" {
+  source  = "Codzs-Architecture/tags-client/aws"
+  version = "0.0.2"
 }
 
-variable "environment_tag_key" {
-  type        = string
-  description = "The tag key for the 'Environment' tag."
-  default     = "Environment"
+data "aws_ssm_parameter" "application_name" {
+  name = "/aft_extension/org/application_name"
 }
 
-variable "owner_tag_key" {
-  type        = string
-  description = "The tag key for the 'Owner' tag."
-  default     = "Owner"
-}
+locals {
+  application_name = data.aws_ssm_parameter.application_name.value
 
-variable "owner_tag_value" {
-  type        = string
-  description = "Owner tag value for the resource."
-  default     = "codzs"
-}
-
-variable "costcenter_tag_key" {
-  type        = string
-  description = "The tag key for the 'CostCenter' tag."
-  default     = "CostCenter"
-}
-
-variable "costcenter_tag_value" {
-  type        = string
-  description = "Cost center tag value for the resource."
-  default     = "technology"
-}
-
-variable "application_tag_key" {
-  type        = string
-  description = "The tag key for the 'Application' tag."
-  default     = "Application"
-}
-
-variable "application_tag_value" {
-  type        = string
-  description = "Application tag value for the resource."
-  default     = "shared"
-}
-
-variable "platform_tag_key" {
-  type        = string
-  description = "The tag key for the 'Platform' tag."
-  default     = "Platform"
-}
-
-variable "platform_tag_value" {
-  type        = string
-  description = "Platform tag value for the resource."
-  default     = "shared"
-}
-
-variable "organization_tag_key" {
-  type        = string
-  description = "The tag key for the 'Organization' tag."
-  default     = "Organization"
-}
-
-variable "organization_tag_value" {
-  type        = string
-  description = "Organization tag value for the resource."
-  default     = "Codzs"
-}
-
-variable "department_tag_key" {
-  type        = string
-  description = "The tag key for the 'Department' tag."
-  default     = "Department"
-}
-
-variable "department_tag_value" {
-  type        = string
-  description = "Department tag value for the resource."
-  default     = "platform"
+  tags = {
+    "${module.tags_client.name_tag_key}" : "cloudwatch-log-retention",
+    "${module.tags_client.environment_tag_key}" : "${var.environment}",
+    "${module.tags_client.owner_tag_key}" : "${local.application_name}",
+    "${module.tags_client.costcenter_tag_key}" : "technology",
+    "${module.tags_client.application_tag_key}" : "shared",
+    "${module.tags_client.platform_tag_key}" : "shared",
+    "${module.tags_client.organization_tag_key}" : "${local.application_name}",
+    "${module.tags_client.department_tag_key}" : "platform"
+  }
 }
