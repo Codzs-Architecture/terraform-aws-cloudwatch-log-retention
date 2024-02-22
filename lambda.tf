@@ -140,7 +140,7 @@ resource "aws_lambda_function" "log_retention_lambda" {
   ]
 
   vpc_config {
-    subnet_ids = data.aws_subnets.this.ids
+    subnet_ids         = data.aws_subnets.this.ids
     security_group_ids = data.aws_security_groups.this.ids
   }
 

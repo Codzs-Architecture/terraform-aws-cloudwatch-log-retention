@@ -108,6 +108,6 @@ variable "lambda_timeout" {
 }
 
 variable "environment" {
-  type    = string
+  type        = string
   description = "Environment for this this resource is deployed"
 }
