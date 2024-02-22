@@ -1,6 +1,6 @@
 module "tags_client" {
   source  = "Codzs-Architecture/tags-client/aws"
-  version = "0.0.2"
+  version = "0.0.3"
 }
 
 data "aws_ssm_parameter" "application_name" {
